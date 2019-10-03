@@ -81,7 +81,3 @@ module "instances" {
   security_groups = ["${module.security_groups.allow_all}"]
   iam_instance_profile = "${module.roles.main_instance_profile}"
 }
-
-# output "main_instance_profile" {
-  # value = "aws_iam_instance_profile.main_profile.name"
-# }
