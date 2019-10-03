@@ -12,9 +12,9 @@ resource "aws_db_instance" "default" {
   instance_class       = "db.t2.micro"
   identifier           = "mydb"
 
-  name                     = var.database["name"][terraform.workspace]
-  username                 = var.database["username"][terraform.workspace]
-  password                 = var.database["password"][terraform.workspace]
+  name                     = var.database.name
+  username                 = var.database.username
+  password                 = var.database.password
 
   db_subnet_group_name = "${aws_db_subnet_group.rds_subnet_group.id}"
   parameter_group_name = "default.mysql5.7"

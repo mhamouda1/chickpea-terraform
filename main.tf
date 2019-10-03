@@ -82,8 +82,9 @@ module "instances" {
   iam_instance_profile = "${module.roles.main_instance_profile}"
 }
 
-# module "rds" {
-  # subnet_ids = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_2[0].id}"]
-  # vpc_security_group_ids = ["${module.security_groups.allow_all}"]
-  # database = "${var.database}"
-# }
+module "rds" {
+  source = "./rds"
+  subnet_ids = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_2[0].id}"]
+  vpc_security_group_ids = ["${module.security_groups.allow_all}"]
+  database = "${var.database}"
+}

@@ -1,5 +1,5 @@
 database = {
-  name = "chickpeadefaultdb"
+  name = "chickpeadevelopment"
   username = "user"
   password = "password"
 }

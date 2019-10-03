@@ -1,10 +1,10 @@
-@path = "env_tfvars"
-@resource = {"database" => nil}
-@resource_name = @resource.keys[0]
+require 'pry'
+@resource_name = "database"
 @fields = ["name", "username", "password"]
-@environments = ["production", "staging"]
+@environments = ["production", "default"]
 
 #create hash
+@resource = {@resource_name => nil}
 @environments.each do |environment|
   @resource[@resource_name] ||= {environment => nil}
   @resource[@resource_name][environment] = nil
@@ -22,9 +22,11 @@ end
 #write to file in terraform format
 @environments.each do |environment|
   @fields.each do |field|
-    File.open("#{@path}/#{environment}.tfvars","w+") do |f|
-      @values = @resource[@resource.keys[0]][environment]
-        f << "#{@resource.keys[0]} = {\n"
+    extension = environment == "default" ? ".auto.tfvars" : ".tfvars"
+
+    File.open(environment + extension,"w+") do |f|
+      @values = @resource[@resource_name][environment]
+        f << "#{@resource_name} = {\n"
         @values.each do |h,k|
           f << "  #{h} = \"#{k}\"\n"
         end
