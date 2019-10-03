@@ -1,19 +1,16 @@
-require 'pry'
-require 'json'
-require 'pp'
-
 @path = "env_tfvars"
 @resource = {"database" => nil}
 @resource_name = @resource.keys[0]
 @fields = ["name", "username", "password"]
 @environments = ["production", "staging"]
 
+#create hash
 @environments.each do |environment|
   @resource[@resource_name] ||= {environment => nil}
   @resource[@resource_name][environment] = nil
 end
 
-
+#grab from env files from linux
 @environments.each do |environment|
   @fields.each do |field|
     env_key = "#{environment.upcase}_#{@resource.keys[0].upcase}_#{field.upcase}"
@@ -22,6 +19,7 @@ end
   end
 end
 
+#write to file in terraform format
 @environments.each do |environment|
   @fields.each do |field|
     File.open("#{@path}/#{environment}.tfvars","w+") do |f|

@@ -4,11 +4,6 @@ variable "AWS_REGION" {}
 
 variable "database" {
   type = "map"
-  # default = {
-    # name = "placeholder",
-    # username = "placeholder",
-    # password = "placeholder"
-  # }
 }
 
 variable "project_name" {}
