@@ -22,6 +22,53 @@ module "public_subnets" {
   public_subnets_2 = "${var.public_subnets_2}"
 }
 
-# module "private_subnets" {
-  # source = "./private_subnets"
-# }
+module "roles" {
+  source = "./roles"
+}
+
+module "security_groups" {
+  source = "./security_groups"
+  vpc = "${module.vpc.id}"
+}
+
+module "routing_tables" {
+  source = "./routing_tables"
+  vpc = "${module.vpc.id}"
+  public_subnets_1 =  "${module.public_subnets.public_subnets_1}"
+  public_subnets_2 =  "${module.public_subnets.public_subnets_2}"
+  internet_gateway =  "${module.vpc.internet_gateway}"
+}
+
+module "elasticache" {
+  source = "./elasticache"
+  subnet_ids = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_1[1].id}"]
+  num_cache_nodes = "${var.num_cache_nodes}"
+}
+
+module "ecr" {
+  source = "./ecr"
+  project_name = "${var.project_name}"
+}
+
+module "elb" {
+  source = "./elb"
+  project_name = "${var.project_name}"
+  security_groups = ["${module.security_groups.allow_all}"]
+  subnets = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_2[0].id}"]
+  target_group_arn =  "${module.target_groups.target_group_1}"
+}
+
+module "target_groups" {
+  vpc = "${module.vpc.id}"
+  source = "./target_groups"
+  port = "${var.target_group_port}"
+}
+
+module "instances" {
+  vpc = "${module.vpc.id}"
+  ami = "${module.amis.amazon_ami}"
+  subnet_id = "${module.public_subnets.public_subnets_1[0].id}"
+  key_name = ""
+  security_groups = ""
+  iam_instance_profile = ""
+}
