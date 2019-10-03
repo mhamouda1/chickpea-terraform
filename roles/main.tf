@@ -24,7 +24,7 @@ resource "aws_iam_instance_profile" "main_profile" {
 }
 
 resource "aws_iam_role_policy" "allow_all_policy" {
-  name = "allow_all_policy"
+  name = "main_policy"
   role = "${aws_iam_role.main_role.id}"
 
   policy = <<EOF

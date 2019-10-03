@@ -5,7 +5,7 @@ resource "aws_instance" "master" {
   key_name      = "${var.key_name}"
   vpc_security_group_ids = "${var.security_groups}"
 
-  iam_instance_profile = "${var.iam_instance_profile}"
+  iam_instance_profile = "main_profile"
 
   # provisioner "file" {
     # source      = "/root/.ssh/id_rsa"
@@ -42,6 +42,6 @@ resource "aws_instance" "master" {
   }
 
   tags = {
-    Name = "${var.project_name}-master"
+    Name = "${terraform.workspace}-${var.project_name}-master"
   }
 }
