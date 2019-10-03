@@ -10,7 +10,7 @@ require 'pry'
   @resource[@resource_name][environment] = nil
 end
 
-#grab from env files from linux
+#grab env variable from linux
 @environments.each do |environment|
   @fields.each do |field|
     env_key = "#{environment.upcase}_#{@resource.keys[0].upcase}_#{field.upcase}"
