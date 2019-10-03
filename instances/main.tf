@@ -1,15 +1,11 @@
 resource "aws_instance" "master" {
-  ami           = "${var.amazon_ami}"
+  ami           = "${var.ami}"
   instance_type = "t2.micro"
-  subnet_id     = "${aws_subnet.public_1[0].id}"
+  subnet_id     = "${var.subnet_id}"
+  key_name      = "${var.key_name}"
+  vpc_security_group_ids = "${var.security_groups}"
 
-  key_name      = "${aws_key_pair.my_key_pair.id}"
-  vpc_security_group_ids = [
-    "${aws_security_group.allow_ssh_and_web.id}",
-    "${aws_vpc.main.default_security_group_id}",
-    "${aws_security_group.development_testing.id}"
-  ]
-  iam_instance_profile = "${aws_iam_instance_profile.test_profile.name}"
+  iam_instance_profile = "${var.iam_instance_profile}"
 
   # provisioner "file" {
     # source      = "/root/.ssh/id_rsa"
@@ -46,6 +42,6 @@ resource "aws_instance" "master" {
   }
 
   tags = {
-    Name = "Master"
+    Name = "${var.project_name}-master"
   }
 }

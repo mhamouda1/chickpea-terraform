@@ -50,6 +50,14 @@ module "ecr" {
   project_name = "${var.project_name}"
 }
 
+module "amis" {
+  source = "./amis"
+}
+
+module "key_pairs" {
+  source = "./key_pairs"
+}
+
 module "elb" {
   source = "./elb"
   project_name = "${var.project_name}"
@@ -59,16 +67,17 @@ module "elb" {
 }
 
 module "target_groups" {
-  vpc = "${module.vpc.id}"
   source = "./target_groups"
+  vpc = "${module.vpc.id}"
   port = "${var.target_group_port}"
 }
 
 module "instances" {
-  vpc = "${module.vpc.id}"
+  source = "./instances"
+  project_name = "${var.project_name}"
   ami = "${module.amis.amazon_ami}"
   subnet_id = "${module.public_subnets.public_subnets_1[0].id}"
-  key_name = ""
-  security_groups = ""
-  iam_instance_profile = ""
+  key_name = "${module.key_pairs.my_key_pair}"
+  security_groups = ["${module.security_groups.allow_all}"]
+  iam_instance_profile = "${module.roles.main_instance_profile}"
 }
