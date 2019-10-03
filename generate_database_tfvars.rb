@@ -18,19 +18,16 @@ end
     @resource[@resource_name][field][environment] = ENV[env_key] || "placeholder"
   end
 end
--var-file=staging.tfvars
 
 @resource = @resource.to_s
 @resource.to_s[0] = ''
 @resource[@resource.to_s.length - 1] = ''
 
 File.open("blah.tfvars","w") do |f|
-  # f.write(JSON.pretty_generate(@resource))
   f.write(@resource)
 end
 
 text = File.read("blah.tfvars")
-# replace = text.gsub(/:/, "=")
 replace = text.gsub(/=>/, " = ")
 replace = replace.gsub(/\"#{@resource_name}\"/, "#{@resource_name}")
 File.open("blah.tfvars", "w") {|file| file.puts replace}
