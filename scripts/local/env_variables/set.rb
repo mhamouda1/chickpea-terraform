@@ -18,7 +18,7 @@ require 'json'
 
   @resource[@resource_name]["name"] = "#{@name}"
   @resource[@resource_name]["environment"] = "#{environment}"
-  @resource[@resource_name]["username"] = "#{SecureRandom.hex}"
+  @resource[@resource_name]["username"] = "myusername2332323"
   @resource[@resource_name]["password"] = "#{SecureRandom.hex}"
   @resources << @resource
 end

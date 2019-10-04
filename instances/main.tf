@@ -8,7 +8,7 @@ resource "aws_instance" "master" {
 
   provisioner "file" {
     source      = "scripts/remote"
-    destination = "/tmp/scripts"
+    destination = "/tmp/scripts/remote/"
   }
 
   provisioner "file" {
@@ -46,7 +46,7 @@ resource "aws_instance" "worker" {
 
   provisioner "file" {
     source      = "scripts/remote"
-    destination = "/tmp/scripts"
+    destination = "/tmp/scripts/remote"
   }
 
   provisioner "file" {
