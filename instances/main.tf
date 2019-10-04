@@ -23,25 +23,6 @@ resource "aws_instance" "master" {
     ]
   }
 
-  # provisioner "remote-exec" {
-    # inline = [
-      # "sudo chmod +x /tmp/master.sh",
-      # "sudo bash /tmp/master.sh S3_BUCKET=${module.s3.bucket_name}",
-    # ]
-  # }
-
-  # provisioner "file" {
-    # source      = "/root/.ssh/id_rsa"
-    # destination = "~/default_my_key_pair.pem"
-  # }
-
-  # provisioner "file" {
-    # source      = "/root/.ssh/id_rsa"
-    # destination = "/home/ec2-user/.ssh/id_rsa"
-  # }
-
-
-
   connection {
     type        = "ssh"
     user        = "ec2-user"
@@ -91,5 +72,5 @@ resource "aws_instance" "worker" {
     Name = "${terraform.workspace}-${var.project_name}-worker-${count.index}"
   }
 
-  # depends_on = [aws_instance.master]
+  depends_on = [aws_instance.master]
 }
