@@ -1,3 +1,6 @@
+#hmmm, why is this not working?
+sudo modprobe br_netfilter
+sudo echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 #install kubernetes
 sudo bash -c "cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
