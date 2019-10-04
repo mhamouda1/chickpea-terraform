@@ -14,8 +14,8 @@ module "vpc" {
   project_name = "${var.project_name}"
 }
 
-module "public_subnets" {
-  source = "./public_subnets"
+module "subnets" {
+  source = "./subnets"
   project_name = "${var.project_name}"
   vpc = "${module.vpc.id}"
   public_subnets_1 = "${var.public_subnets_1}"
@@ -34,14 +34,14 @@ module "security_groups" {
 module "routing_tables" {
   source = "./routing_tables"
   vpc = "${module.vpc.id}"
-  public_subnets_1 =  "${module.public_subnets.public_subnets_1}"
-  public_subnets_2 =  "${module.public_subnets.public_subnets_2}"
+  public_subnets_1 =  "${module.subnets.public_subnets_1}"
+  public_subnets_2 =  "${module.subnets.public_subnets_2}"
   internet_gateway =  "${module.vpc.internet_gateway}"
 }
 
 module "elasticache" {
   source = "./elasticache"
-  subnet_ids = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_1[1].id}"]
+  subnet_ids = ["${module.subnets.public_subnets_1[0].id}", "${module.subnets.public_subnets_1[1].id}"]
   num_cache_nodes = "${var.num_cache_nodes}"
 }
 
@@ -62,7 +62,7 @@ module "elb" {
   source = "./elb"
   project_name = "${var.project_name}"
   security_groups = ["${module.security_groups.allow_all}"]
-  subnets = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_2[0].id}"]
+  subnets = ["${module.subnets.public_subnets_1[0].id}", "${module.subnets.public_subnets_2[0].id}"]
   target_group_arn =  "${module.target_groups.target_group_1}"
 }
 
@@ -76,7 +76,7 @@ module "instances" {
   source = "./instances"
   project_name = "${var.project_name}"
   ami = "${module.amis.amazon_ami}"
-  subnet_id = "${module.public_subnets.public_subnets_1[0].id}"
+  subnet_id = "${module.subnets.public_subnets_1[0].id}"
   key_name = "${module.key_pairs.my_key_pair}"
   security_groups = ["${module.security_groups.allow_all}"]
   iam_instance_profile = "${module.roles.main_instance_profile}"
@@ -87,7 +87,7 @@ module "instances" {
 module "rds" {
   source = "./rds"
   project_name = "${var.project_name}"
-  subnet_ids = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_2[0].id}"]
+  subnet_ids = ["${module.subnets.public_subnets_1[0].id}", "${module.subnets.public_subnets_2[0].id}"]
   vpc_security_group_ids = ["${module.security_groups.allow_all}"]
   database = "${var.database}"
 }

@@ -10,7 +10,7 @@ resource "aws_db_instance" "default" {
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
-  identifier           = var.database.name
+  identifier           = var.project_name
 
   name                     = var.database.name
   username                 = var.database.username
