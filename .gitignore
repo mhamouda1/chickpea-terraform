@@ -12,11 +12,15 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+**/*production.*.tfvars*
 **/*production.tfvars*
+
 **/*uat.*.tfvars*
+**/*uat.tfvars*
+
 **/*staging.*.tfvars*
-**/*default.*.tfvars*
-**/*development.*.tfvars*
+**/*staging.tfvars*
 
 # Crash log files
 crash.log
