@@ -6,7 +6,7 @@ hostnamectl set-hostname "node$NODE-$HOSTNAME"
 sudo bash -c "echo \"127.0.0.1 $(hostname)\" >> /etc/hosts"
 
 #shortcut for development
-sleep 50 && \
+sleep 80 && \
 cd /tmp/scripts && \
 bash install/git.sh && \
 bash install/docker.sh && \
