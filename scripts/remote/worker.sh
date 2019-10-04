@@ -7,7 +7,7 @@ sudo bash -c "echo \"127.0.0.1 $(hostname)\" >> /etc/hosts"
 
 #shortcut for development
 sleep 80 && \
-cd /tmp/scripts/remote && \
+cd /tmp/scripts && \
 bash install/git.sh && \
 bash install/docker.sh && \
 bash install/kubernetes.sh && \
