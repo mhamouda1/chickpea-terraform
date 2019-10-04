@@ -7,7 +7,8 @@ require 'json'
 @resource_name = "database"
 @name = "chickpea-mysql"
 @fields = ["name", "username", "password", "environment"]
-@environments = ["production", "default", "staging", "uat", "development"]
+# @environments = ["production", "default", "staging", "uat", "development"]
+@environments = ["default"]
 @host = "157.245.224.16"
 
 @environments.each do |environment|
