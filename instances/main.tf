@@ -72,5 +72,5 @@ resource "aws_instance" "worker" {
     Name = "${terraform.workspace}-${var.project_name}-worker-${count.index}"
   }
 
-  depends_on = [aws_instance.master]
+  # depends_on = [aws_instance.master]
 }
