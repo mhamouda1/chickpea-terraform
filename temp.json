@@ -1,0 +1,8 @@
+{
+  "database": {
+    "name": "chickpea-mysql",
+    "environment": "staging",
+    "username": "bf72d72e2a3dba1d97ed4bbdfd7e796f",
+    "password": "9d5249b4ad52dee3a2a43b14ba57a5ec"
+  }
+}
