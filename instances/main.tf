@@ -8,7 +8,7 @@ resource "aws_instance" "master" {
 
   provisioner "file" {
     source      = "scripts/remote"
-    destination = "/tmp"
+    destination = "/tmp/scripts"
   }
 
   provisioner "file" {
@@ -46,7 +46,7 @@ resource "aws_instance" "worker" {
 
   provisioner "file" {
     source      = "scripts/remote"
-    destination = "/tmp"
+    destination = "/tmp/scripts"
   }
 
   provisioner "file" {
@@ -57,7 +57,7 @@ resource "aws_instance" "worker" {
   provisioner "remote-exec" {
     inline = [
       "sudo chmod +x /tmp/scripts/remote/worker.sh",
-      "sudo bash /tmp/scripts//remote/worker.sh S3_BUCKET=${var.s3_bucket} NODE=${count.index}",
+      "sudo bash /tmp/scripts/remote/worker.sh S3_BUCKET=${var.s3_bucket} NODE=${count.index}",
     ]
   }
 

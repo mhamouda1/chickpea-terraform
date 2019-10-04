@@ -5,7 +5,7 @@ require 'json'
 @delete_previous_fields = true
 
 @resource_name = "database"
-@name = "chickpea-mysql"
+@name = "appmysql"
 @fields = ["name", "username", "password", "environment"]
 @environments = ["production", "default", "staging", "uat", "development"]
 @host = "157.245.224.16"
