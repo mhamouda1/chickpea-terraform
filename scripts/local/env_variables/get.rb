@@ -16,7 +16,7 @@ require 'json'
   @response = JSON.parse(`curl -XPOST "http://#{@host}:9200/chickpea/_search" -H 'Content-Type: application/json' -d'{  "query": {    "bool": {      "must": [        {          "term": {            "database.name.keyword": "'#{@name}'"          }        },        {          "term": {            "database.environment.keyword": "'#{environment}'"          }        }      ]    }  }}'`)
 
   @response_object = @response["hits"]["hits"][0]["_source"]
-  File.open("#{environment}.tfvars.json","w") do |f|
+  File.open("#{environment}.auto.tfvars.json","w") do |f|
     f.write(JSON.pretty_generate(@response_object))
   end
 end
