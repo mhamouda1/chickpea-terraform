@@ -86,6 +86,7 @@ module "instances" {
 
 module "rds" {
   source = "./rds"
+  project_name = "${var.project_name}"
   subnet_ids = ["${module.public_subnets.public_subnets_1[0].id}", "${module.public_subnets.public_subnets_2[0].id}"]
   vpc_security_group_ids = ["${module.security_groups.allow_all}"]
   database = "${var.database}"
