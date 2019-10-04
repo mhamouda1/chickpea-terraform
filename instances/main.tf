@@ -7,7 +7,7 @@ resource "aws_instance" "master" {
   iam_instance_profile = "${var.iam_instance_profile}"
 
   provisioner "file" {
-    source      = "scripts"
+    source      = "scripts/remote"
     destination = "/tmp"
   }
 
@@ -18,8 +18,8 @@ resource "aws_instance" "master" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo chmod +x /tmp/scripts/master.sh",
-      "sudo bash /tmp/scripts/master.sh S3_BUCKET=${var.s3_bucket}",
+      "sudo chmod +x /tmp/scripts/remote/master.sh",
+      "sudo bash /tmp/scripts/remote/master.sh S3_BUCKET=${var.s3_bucket}",
     ]
   }
 
@@ -45,7 +45,7 @@ resource "aws_instance" "worker" {
   iam_instance_profile = "${var.iam_instance_profile}"
 
   provisioner "file" {
-    source      = "scripts"
+    source      = "scripts/remote"
     destination = "/tmp"
   }
 
@@ -56,8 +56,8 @@ resource "aws_instance" "worker" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo chmod +x /tmp/scripts/worker.sh",
-      "sudo bash /tmp/scripts/worker.sh S3_BUCKET=${var.s3_bucket} NODE=${count.index}",
+      "sudo chmod +x /tmp/scripts/remote/worker.sh",
+      "sudo bash /tmp/scripts//remote/worker.sh S3_BUCKET=${var.s3_bucket} NODE=${count.index}",
     ]
   }
 
