@@ -5,7 +5,7 @@ hostnamectl set-hostname master
 sudo bash -c "echo \"127.0.0.1 $(hostname)\" >> /etc/hosts"
 
 sudo yum update -y
-cd /tmp/scripts
+cd /tmp/scripts/remote
 bash install/git.sh
 bash install/docker.sh
 bash install/kubernetes.sh

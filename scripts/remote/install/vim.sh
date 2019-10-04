@@ -8,4 +8,4 @@ echo ':imap kj <Esc>'  >> ~/.dotfiles/vimrc && \
 echo ':nmap Z :wa<CR>'  >> ~/.dotfiles/vimrc && \
 echo "Bundle 'ervandew/screen'" >> ~/.custom.vim-plugins && \
 ./setup.sh
-cd /tmp/scripts
+cd /tmp/scripts/remote
