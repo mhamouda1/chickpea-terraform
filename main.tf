@@ -80,6 +80,8 @@ module "instances" {
   key_name = "${module.key_pairs.my_key_pair}"
   security_groups = ["${module.security_groups.allow_all}"]
   iam_instance_profile = "${module.roles.main_instance_profile}"
+  num_workers = "${var.num_workers}"
+  s3_bucket = "${module.s3.bucket}"
 }
 
 module "rds" {
