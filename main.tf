@@ -91,3 +91,10 @@ module "rds" {
   vpc_security_group_ids = ["${module.security_groups.allow_all}"]
   database = "${var.database}"
 }
+
+module "output_env" {
+  source = "./output_env"
+  database = "${module.rds.address}"
+  s3 = "${module.s3.bucket}"
+  elasticache = "${module.elasticache.cluster_address}"
+}

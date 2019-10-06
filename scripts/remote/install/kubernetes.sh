@@ -13,5 +13,5 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
    https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF"
 sudo yum update -y
-sudo yum install kubelet kubeadm kubectl -y
+sudo yum install kubelet-1.15.4 kubeadm-1.15.4 kubectl-1.15.4 -y
 sudo systemctl enable kubelet
