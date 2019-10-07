@@ -98,3 +98,10 @@ module "output_env" {
   s3 = "${module.s3.bucket}"
   elasticache = "${module.elasticache.cluster_address}"
 }
+
+module "elasticsearch" {
+  source = "./elasticsearch"
+  database = "${module.rds.object}"
+  s3 = "${module.s3.object}"
+  ecr = "${module.ecr.object}"
+}

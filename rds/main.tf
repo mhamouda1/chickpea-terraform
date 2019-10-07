@@ -20,4 +20,5 @@ resource "aws_db_instance" "default" {
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot  = "true"
   vpc_security_group_ids = "${var.vpc_security_group_ids}"
+  publicly_accessible  = "true"
 }

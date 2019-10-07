@@ -1,4 +1,5 @@
-project_name = "chickpea-app"
+project_name = "chickpea"
+
 num_workers = 1
 num_cache_nodes = 1
 target_group_port = 31111

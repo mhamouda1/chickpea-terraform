@@ -10,3 +10,6 @@ output "elasticache" {
   value = "${module.elasticache.cluster_address}"
 }
 
+output "ecr" {
+  value = "${module.ecr.repository_url}"
+}

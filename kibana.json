@@ -1,0 +1,43 @@
+//get indices
+//GET _cat/indices
+
+//get shards
+//GET _cat/shards
+
+//delete the index
+//DELETE chickpea
+
+//create the index
+PUT /chickpea
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
+  }
+}
+
+//add the username/passwords for each environment
+POST /chickpea/_doc
+{
+  "database": {
+    "name": "core",
+    "username": "placeholder",
+    "password": "placeholder",
+    "environment": "production"
+  }
+}
+
+//retrieve the values using the method below:
+GET /chickpea/_search
+{
+  "query": {
+    "bool" : {
+      "must" : [
+        {  "term" : { "database.name.keyword": "core" }},
+        {  "term" : { "database.environment.keyword" : "production" }}
+      ]
+    }
+  }
+}
