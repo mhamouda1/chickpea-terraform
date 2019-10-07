@@ -12,6 +12,5 @@ resource "aws_s3_bucket" "main" {
 
   tags = {
     Name = "${var.project_name}"
-    testing_1 = "this is a test"
   }
 }
