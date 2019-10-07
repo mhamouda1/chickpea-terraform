@@ -1,3 +1,4 @@
+require 'json'
 @arguments = {}
 @ES_HOST = ENV['ES_HOST'] #put in ~/.bash_profile
 
