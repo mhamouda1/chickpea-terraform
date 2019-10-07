@@ -1,3 +1,10 @@
+terraform {
+  backend "s3" {
+    bucket = "asdfasdfasfd92323990as9df0"
+    region = "us-east-1"
+  }
+}
+
 provider "aws" {
   region     = "${var.AWS_REGION}"
   access_key = "${var.AWS_ACCESS_KEY_ID}"
